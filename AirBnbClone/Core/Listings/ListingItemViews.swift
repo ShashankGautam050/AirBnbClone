@@ -9,49 +9,34 @@ import SwiftUI
 
 struct ListingItemViews: View {
     
-    var lists = [
-        "house1","house2","house4","house3"
-    ]
+    var item : ExploreItemModel
     var body: some View {
-        VStack(spacing : 12){
-            TabView{
-                ForEach(lists,id: \.self){ image in
-                    Image(image)
-                        .resizable()
-                        .scaledToFill()
-                        .background {
-                            RoundedRectangle(cornerRadius: 12)
-                                .shadow(radius: 4)
-                        }
-                }
-            }
-            .frame(height: 320)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .tabViewStyle(.page)
-            
-            HStack(alignment : .top){
-                VStack(alignment : .leading){
-                    Text("Miami, Florida")
-                        .fontWeight(.semibold)
-                    Text("12 miles away")
-                        .foregroundStyle(.secondary)
-                    Text("3 - 10 nov")
-                        .foregroundStyle(.secondary)
-                    HStack(spacing : 4){
-                        Text("$567")
+      
+            VStack(spacing : 12){
+                ListingImageCarsoulViewer(images: item.houseImage,height: 250,cornerRadius: 12)
+                HStack(alignment : .top){
+                    VStack(alignment : .leading){
+                        Text(item.houseName)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                        Text("night")
+                        Text("\(item.houseDistance) miles away")
+                            .foregroundStyle(.secondary)
+                        Text("3 - 10 nov")
+                            .foregroundStyle(.secondary)
+                        HStack(spacing : 4){
+                            Text("$\(item.housePrice)")
+                                .fontWeight(.semibold)
+                            Text("night")
+                        }
                     }
+                    Spacer()
+                    RatingView(rating: item.houseRating)
                 }
-                Spacer()
-                HStack(spacing : 3){
-                    Image(systemName: "star.fill")
-                    Text("4.86")
-                }
+                .font(.footnote)
             }
-            .font(.footnote)
-        }
-        .padding(24)
+            .padding()
+            .listRowSeparator(Visibility.hidden)
+        
        
         
         
@@ -60,5 +45,5 @@ struct ListingItemViews: View {
 }
 
 #Preview {
-    ListingItemViews()
+    ListingItemViews(item: ExploreItemModel.lists.first!)
 }
