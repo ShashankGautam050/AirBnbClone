@@ -19,6 +19,10 @@ struct ListingItemViews: View {
                     Image(image)
                         .resizable()
                         .scaledToFill()
+                        .background {
+                            RoundedRectangle(cornerRadius: 12)
+                                .shadow(radius: 4)
+                        }
                 }
             }
             .frame(height: 320)
@@ -47,7 +51,7 @@ struct ListingItemViews: View {
             }
             .font(.footnote)
         }
-        .padding(.horizontal,24)
+        .padding(24)
        
         
         
